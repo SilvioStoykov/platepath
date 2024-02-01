@@ -12,24 +12,24 @@ namespace PlatePath.API.Data.Models.Recipes
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        
+
         public Post? Post { get; set; }
 
         [JsonIgnore]
-        public ICollection<MealPlan> MealPlans { get; set; } = new List<MealPlan>();
-        
+        public ICollection<MealPlanRecipe> MealPlanRecipes { get; set; } = new List<MealPlanRecipe>();
+
         public string? EdamamId { get; set; }
-        
+
         public string Name { get; set; }
-        
+
         public int Kcal { get; set; }
 
         public int Servings { get; set; }
 
         public int Carbohydrates { get; set; }
-        
+
         public int Fats { get; set; }
-        
+
         public int Protein { get; set; }
 
         public string IngredientLines { get; set; }

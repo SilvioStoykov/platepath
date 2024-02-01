@@ -42,24 +42,39 @@ namespace PlatePath.API.Data
                 .WithOne(e => e.Post)
                 .HasForeignKey<Recipe>("PostId")
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<MealPlanRecipe>()
+                .HasKey(mpr => new { mpr.MealPlanId, mpr.RecipeId });
+
+            builder.Entity<MealPlanRecipe>()
+                .HasOne(mpr => mpr.MealPlan)
+                .WithMany(mp => mp.MealPlanRecipes)
+                .HasForeignKey(mpr => mpr.MealPlanId);
+
+            builder.Entity<MealPlanRecipe>()
+                .HasOne(mpr => mpr.Recipe)
+                .WithMany(r => r.MealPlanRecipes)
+                .HasForeignKey(mpr => mpr.RecipeId);
         }
 
         public DbSet<Recipe> Recipes { get; set; }
 
         public DbSet<MealPlan> MealPlans { get; set; }
 
+        public DbSet<MealPlanRecipe> MealPlanRecipes { get; set; }
+
         public DbSet<Gender> Genders { get; set; }
 
         public DbSet<ActivityLevel> ActivityLevel { get; set; }
 
         public DbSet<WeightGoal> WeightGoal { get; set; }
-        
+
         public DbSet<Post> Posts { get; set; }
-        
+
         public DbSet<Comment> Comments { get; set; }
-        
+
         public DbSet<Like> Likes { get; set; }
-        
+
 
         private static void SeedRoles(ModelBuilder builder, IConfiguration configuration)
         {
